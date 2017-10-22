@@ -267,6 +267,10 @@ public class HyperlinkManager implements ITextListener, Listener, KeyListener, M
 	 * @since 3.7
 	 */
 	private IHyperlink[] findHyperlinks(IRegion region) {
+
+		if (region.getLength() > 1024)
+			return null;
+
 		List<IHyperlink> allHyperlinks= new ArrayList<>(fHyperlinkDetectors.length * 2);
 		synchronized (fHyperlinkDetectors) {
 			for (IHyperlinkDetector detector : fHyperlinkDetectors) {
